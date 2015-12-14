@@ -49,6 +49,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveDirectoryUser.Core\ActiveDirectoryUser.Core.csproj">
+      <Project>{B41B4B8E-94FE-4465-88AD-A1C447F86110}</Project>
+      <Name>ActiveDirectoryUser.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActiveDirectoryUser.Model\ActiveDirectoryUser.Model.csproj">
+      <Project>{8CD723EF-531A-4307-8597-1F7CC1C7E7C9}</Project>
+      <Name>ActiveDirectoryUser.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
