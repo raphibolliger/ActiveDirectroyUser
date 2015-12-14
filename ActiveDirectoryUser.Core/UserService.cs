@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ActiveDirectoryUser.Model;
@@ -53,9 +51,15 @@ namespace ActiveDirectoryUser.Core
             }
         }
 
-        public List<User> ReadUserList()
+        public List<User> ReadUserListFromFile(string jsonFilePath)
         {
-            throw new NotImplementedException();
+            List<User> jUserList = new List<User>();
+            using (StreamReader r = new StreamReader(jsonFilePath))
+            {
+                string json = r.ReadToEnd();
+                jUserList = JsonConvert.DeserializeObject<List<User>>(json);
+            }
+            return jUserList;
         }
 
 

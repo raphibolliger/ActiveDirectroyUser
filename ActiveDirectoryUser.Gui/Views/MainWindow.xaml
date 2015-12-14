@@ -1,0 +1,26 @@
+﻿<Window x:Class="ActiveDirectoryUser.Gui.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:ActiveDirectoryUser.Gui.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
+        mc:Ignorable="d"
+        x:Name="Window"
+        Title="Active Directory Users" Height="159.851" Width="464.082" WindowStartupLocation="CenterOwner">
+
+    <Grid>
+        <Button x:Name="openFileDialog" Content="Load Users from Json" Margin="0,0,10,6" HorizontalAlignment="Right" Width="128" Command="{Binding Path=OpenFileCommand}" Height="20" VerticalAlignment="Bottom"/>
+        <DataGrid x:Name="UsersDataGrid" Margin="10,10,10,31" ItemsSource="{Binding Path=Users}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="First Name" Binding="{Binding Path=FirstName}" />
+                <DataGridTextColumn Width="*" Header="Last Name" Binding="{Binding Path=LastName}" />
+                <DataGridTextColumn Width="*" Header="Username" Binding="{Binding Path=UserName}" />
+                <DataGridTextColumn Width="*" Header="Password" Binding="{Binding Path=Password}" />
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+        <TextBox x:Name="jsonFileTextBox" Margin="10,0,143,6" TextWrapping="Wrap" Text="{Binding JsonFilePath}" IsEnabled="False" Height="20" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>
