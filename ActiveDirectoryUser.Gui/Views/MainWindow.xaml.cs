@@ -13,5 +13,6 @@ namespace ActiveDirectoryUser.Gui.Views
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }
+
     }
 }

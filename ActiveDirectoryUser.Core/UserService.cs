@@ -23,18 +23,19 @@ namespace ActiveDirectoryUser.Core
 
         public async Task<User> LoadUser()
         {
-            var jsonUser = LoadRandomUser().Result;
+            var jsonUser = await LoadRandomUser();
             JObject jUser = JObject.Parse(jsonUser);
 
-            string firstName = (string)jUser["results"][0]["user"]["name"]["first"];
-            string lastName = (string)jUser["results"][0]["user"]["name"]["last"];
+            string firstName = Regex.Replace((string)jUser["results"][0]["user"]["name"]["first"], @"\s+", "");
+            string lastName = Regex.Replace((string)jUser["results"][0]["user"]["name"]["last"], @"\s+", "");
+            string userName = firstName + "." + lastName;
 
             var user = new User
             {
-                FirstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Regex.Replace(firstName, @"\s+", "")),
-                LastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Regex.Replace(lastName, @"\s+", "")),
-                Password = "itsar2015",
-                UserName = firstName+"."+lastName
+                FirstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(firstName),
+                LastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lastName),
+                Password = "Itsar2015",
+                UserName = userName.Substring(0, Math.Min(20, userName.Length))
             };
 
             return user;

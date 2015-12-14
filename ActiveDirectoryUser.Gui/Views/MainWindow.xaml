@@ -7,20 +7,43 @@
         d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
         mc:Ignorable="d"
         x:Name="Window"
-        Title="Active Directory Users" Height="159.851" Width="464.082" WindowStartupLocation="CenterOwner">
+        Title="Active Directory Users" Height="641.392" Width="596.322" WindowStartupLocation="CenterOwner">
 
     <Grid>
-        <Button x:Name="openFileDialog" Content="Load Users from Json" Margin="0,0,10,6" HorizontalAlignment="Right" Width="128" Command="{Binding Path=OpenFileCommand}" Height="20" VerticalAlignment="Bottom"/>
-        <DataGrid x:Name="UsersDataGrid" Margin="10,10,10,31" ItemsSource="{Binding Path=Users}" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="First Name" Binding="{Binding Path=FirstName}" />
-                <DataGridTextColumn Width="*" Header="Last Name" Binding="{Binding Path=LastName}" />
-                <DataGridTextColumn Width="*" Header="Username" Binding="{Binding Path=UserName}" />
-                <DataGridTextColumn Width="*" Header="Password" Binding="{Binding Path=Password}" />
-            </DataGrid.Columns>
+        <Button x:Name="openFileDialog" Content="Userdaten laden" Margin="16,93,10,0" Command="{Binding Path=OpenFileCommand}" Height="25" VerticalAlignment="Top"/>
+        <Button x:Name="SaveUsersToAdButton" Content="User ins ActiveDirectory übertragen" Command="{Binding Path=SaveUsersToAdCommand}" Margin="16,333,10,0" VerticalAlignment="Top" Height="25"/>
+        <Button x:Name="LoadAllUsersFromAdButton" Content="Aktualisieren" Command="{Binding LoadAdUsersCommand}" Margin="16,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130"/>
 
+        <ListView x:Name="AdUsersListView" ItemsSource="{Binding AdUsers}" Margin="16,383,10,40">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="First Name" Width="130"/>
+                    <GridViewColumn Header="Last Name" Width="130"/>
+                    <GridViewColumn Header="Username" Width="130"/>
+                    <GridViewColumn Header="Logon" Width="130"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-        </DataGrid>
-        <TextBox x:Name="jsonFileTextBox" Margin="10,0,143,6" TextWrapping="Wrap" Text="{Binding JsonFilePath}" IsEnabled="False" Height="20" VerticalAlignment="Bottom"/>
+        <ListView x:Name="JsonUsersListView" ItemsSource="{Binding Users}" Margin="16,154,10,0" Height="131" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Width="130" Header="First Name" />
+                    <GridViewColumn DisplayMemberBinding="{Binding LastName}" Width="130" Header="Last Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserName}" Width="130" Header="Username"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Password}" Width="130" Header="Password"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="DeleteUsersFromAdButton" Content="Alle User löschen" Command="{Binding DeleteUsresOnAdCommand}" Margin="151,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130"/>
+        <Label x:Name="label" Content="Testuser für ActiveDirectory" Margin="10,10,10,0" VerticalAlignment="Top" FontSize="18.667"/>
+        <TextBlock Margin="16,45,10,522" TextWrapping="WrapWithOverflow">
+            Importieren Sie von einem Json File beliebig viele Benutzerdaten. Mit diesen Rohdaten werden dann Testuser für ein Active Directory erzeugt.
+        </TextBlock>
+        <Label x:Name="label1" Content="Bitte wählen Sie eine Json Datei mit den Userdaten..." Margin="12,123,234,0" VerticalAlignment="Top" RenderTransformOrigin="-0.158,-0.154"/>
+        <Label x:Name="label2" Content="Anzahl importierte Userdaten: 0" Margin="0,123,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="220"/>
+        <Label x:Name="label3" Content="Die Benutzer können nun ins ActiveDirectory übertragen werden." Margin="12,297,14,0" VerticalAlignment="Top" FontSize="14.667" Height="32"/>
+        <CheckBox x:Name="checkBox1" IsChecked="{Binding ShowWarningMessages}" Content="Warnungen bei Fehler oder bereits erfassten User unterdrücken." Margin="16,363,215,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

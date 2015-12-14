@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ActiveDirectoryUser.Core;
 using ActiveDirectoryUser.Model;
 
@@ -10,21 +11,23 @@ namespace ActiveDirectoryUser.Cmd
         static void Main(string[] args)
         {
             var userService = new UserService();
-            var userList = new List<User>();
+            var userList = new HashSet<User>();
 
             Console.WriteLine("Bitte geben Sie die anzahl Benutzer ein: ");
             var userCountString = Console.ReadLine();
             var userCount = int.Parse(userCountString);
-            for (int i = 0; i < userCount; i++)
+            while (userList.Count < userCount)
             {
                 var user = userService.LoadUser().Result;
-                userList.Add(user);
-                Console.WriteLine(user.FirstName+ " " + user.LastName + " ("+user.UserName+")");
+                if (userList.Add(user))
+                    Console.WriteLine(user.FirstName + " " + user.LastName + " (" + user.UserName + ")");
+                else
+                    Console.WriteLine("---!!--- "+user.FirstName + " " + user.LastName + " (" + user.UserName + ")");
             }
 
             Console.WriteLine();
             Console.WriteLine("Saved all Users to \"C:\\Daten\\jsonUsers.txt\"");
-            userService.SaveUserList(userList);
+            userService.SaveUserList(userList.ToList());
 
             // don't hide the window
             Console.ReadLine();
