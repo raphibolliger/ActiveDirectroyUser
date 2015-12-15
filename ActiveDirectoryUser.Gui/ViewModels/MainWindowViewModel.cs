@@ -45,6 +45,11 @@ namespace ActiveDirectoryUser.Gui.ViewModels
             }
         }
 
+        public string CountUsers
+        {
+            get { return "Anzahl importierte Userdaten: " + Users.Count; }
+        }
+
         public ICommand OpenFileCommand { get; private set; }
         public ICommand SaveUsersToAdCommand { get; private set; }
         public ICommand LoadAdUsersCommand { get; private set; }
@@ -71,6 +76,7 @@ namespace ActiveDirectoryUser.Gui.ViewModels
             var service = new UserService();
             var userList = service.ReadUserListFromFile(JsonFilePath);
             userList.ForEach(u => Users.Add(u));
+            OnPropertyChanged("CountUsers");
         }
 
         private void LoadAdUsers()
@@ -99,6 +105,7 @@ namespace ActiveDirectoryUser.Gui.ViewModels
                     }
                 }
             }
+            LoadAdUsers();
         }
 
         private void DeleteAllUsersOnAd()

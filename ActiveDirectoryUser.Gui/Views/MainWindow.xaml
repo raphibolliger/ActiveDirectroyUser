@@ -17,10 +17,7 @@
         <ListView x:Name="AdUsersListView" ItemsSource="{Binding AdUsers}" Margin="16,383,10,40">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="First Name" Width="130"/>
-                    <GridViewColumn Header="Last Name" Width="130"/>
-                    <GridViewColumn Header="Username" Width="130"/>
-                    <GridViewColumn Header="Logon" Width="130"/>
+                    <GridViewColumn Header="Username" Width="330"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -36,13 +33,13 @@
             </ListView.View>
         </ListView>
 
-        <Button x:Name="DeleteUsersFromAdButton" Content="Alle User löschen" Command="{Binding DeleteUsresOnAdCommand}" Margin="151,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130"/>
+        <Button x:Name="DeleteUsersFromAdButton" Content="Alle AD User löschen" Command="{Binding DeleteUsresOnAdCommand}" Margin="151,0,0,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130"/>
         <Label x:Name="label" Content="Testuser für ActiveDirectory" Margin="10,10,10,0" VerticalAlignment="Top" FontSize="18.667"/>
         <TextBlock Margin="16,45,10,522" TextWrapping="WrapWithOverflow">
             Importieren Sie von einem Json File beliebig viele Benutzerdaten. Mit diesen Rohdaten werden dann Testuser für ein Active Directory erzeugt.
         </TextBlock>
         <Label x:Name="label1" Content="Bitte wählen Sie eine Json Datei mit den Userdaten..." Margin="12,123,234,0" VerticalAlignment="Top" RenderTransformOrigin="-0.158,-0.154"/>
-        <Label x:Name="label2" Content="Anzahl importierte Userdaten: 0" Margin="0,123,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="220"/>
+        <Label x:Name="label2" Content="{Binding CountUsers}" Margin="0,123,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="220" Height="26"/>
         <Label x:Name="label3" Content="Die Benutzer können nun ins ActiveDirectory übertragen werden." Margin="12,297,14,0" VerticalAlignment="Top" FontSize="14.667" Height="32"/>
         <CheckBox x:Name="checkBox1" IsChecked="{Binding ShowWarningMessages}" Content="Warnungen bei Fehler oder bereits erfassten User unterdrücken." Margin="16,363,215,0" VerticalAlignment="Top"/>
     </Grid>

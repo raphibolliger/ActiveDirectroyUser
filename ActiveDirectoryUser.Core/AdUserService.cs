@@ -63,14 +63,13 @@ namespace ActiveDirectoryUser.Core
 
             deUser.CommitChanges();
 
-            // TODO: Passwort exception prüfen
             ChangePassword(adUser.UserName, "", adUser.Password);
             EnableUser(adUser.UserName);
             deUser.Dispose();
             de.Dispose();
             return true;
-
         }
+
         public static bool DeleteUser(string userName)
         {
             var deUser = GetUserByName(userName);
